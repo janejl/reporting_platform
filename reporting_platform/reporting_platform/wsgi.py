@@ -8,9 +8,15 @@ https://docs.djangoproject.com/en/1.9/howto/deployment/wsgi/
 """
 
 import os
+import sys
 
-from django.core.wsgi import get_wsgi_application
+path = '/home/janejl/reporting_platform'  # use your own PythonAnywhere username here
+if path not in sys.path:
+    sys.path.append(path)
 
+# os.environ['DJANGO_SETTINGS_MODULE'] = 'reporting_platform.settings'
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "reporting_platform.settings")
 
-application = get_wsgi_application()
+from django.core.wsgi import get_wsgi_application
+from django.contrib.staticfiles.handlers import StaticFilesHandler
+application = StaticFilesHandler(get_wsgi_application())
